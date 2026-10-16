@@ -208,7 +208,7 @@
         and your own <b>OpenVPN</b>, side by side in one small window. No more juggling four clients.
       </p>
       <div class="cta">
-        <a class="btn primary download" href="https://github.com/giorgobiani/molehill/releases/latest">⤓ Download for Windows <small class="ver"></small></a>
+        <a class="btn primary download" href="https://github.com/giorgobiani/molehill/releases/latest/download/molehill-setup.exe">⤓ Download for Windows <small class="ver"></small></a>
         <a class="btn" href="https://github.com/giorgobiani/molehill">★ Source on GitHub</a>
       </div>
       <div class="meta"><span>MIT licensed</span><span>Installs what it needs</span><span>Updates itself</span></div>
@@ -312,7 +312,7 @@
     <h2>Dig in.</h2>
     <p class="sub" style="margin:0 auto 30px">Free and open source, for anyone who needs more than one VPN.</p>
     <div class="cta">
-      <a class="btn primary download" href="https://github.com/giorgobiani/molehill/releases/latest">⤓ Download for Windows <small class="ver"></small></a>
+      <a class="btn primary download" href="https://github.com/giorgobiani/molehill/releases/latest/download/molehill-setup.exe">⤓ Download for Windows <small class="ver"></small></a>
       <a class="btn" href="https://github.com/giorgobiani/molehill/issues">Report an issue</a>
     </div>
   </div>
@@ -387,7 +387,8 @@
     setTimeout(() => { t.classList.replace('busy', 'on'); t.querySelector('i').textContent = 'Connected · 10.8.0.' + (2 + tunnels.indexOf(t)); update(); hop(); }, 900);
   }));
 
-  // The download buttons go straight to the latest installer when GitHub says which.
+  // The buttons link /releases/latest/download/molehill-setup.exe, which always
+  // serves the newest installer; with GitHub's answer they also show the version.
   fetch('https://api.github.com/repos/giorgobiani/molehill/releases/latest')
     .then(r => r.ok ? r.json() : null)
     .then(rel => {

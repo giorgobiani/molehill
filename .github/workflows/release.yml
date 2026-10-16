@@ -3,6 +3,8 @@
 # two files on the latest release:
 #   molehill-setup-<version>.exe
 #   molehill-setup-<version>.exe.sha256
+# and also uploads molehill-setup.exe, a copy with a fixed name, so
+# /releases/latest/download/molehill-setup.exe is a permanent download link.
 name: Release
 
 on:
@@ -54,6 +56,10 @@ jobs:
           $exe = "installer\Output\molehill-setup-${{ steps.version.outputs.version }}.exe"
           $hash = (Get-FileHash $exe -Algorithm SHA256).Hash.ToLower()
           "$hash  molehill-setup-${{ steps.version.outputs.version }}.exe" | Set-Content -NoNewline -Encoding ascii "$exe.sha256"
+          # The same installer under a fixed name: /releases/latest/download/molehill-setup.exe
+          # then always serves the newest one (the website links it). The app's
+          # updater only looks at the versioned file and its checksum.
+          Copy-Item $exe "installer\Output\molehill-setup.exe"
 
       - name: Publish the release
         shell: pwsh
@@ -64,6 +70,7 @@ jobs:
           gh release create "${{ github.ref_name }}" `
             "installer\Output\molehill-setup-$v.exe" `
             "installer\Output\molehill-setup-$v.exe.sha256" `
+            "installer\Output\molehill-setup.exe" `
             --title "Molehill $v" `
             --generate-notes `
             --verify-tag
