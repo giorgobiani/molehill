@@ -17,7 +17,7 @@ rfd = "0.17"
 slint = { version = "1.18", features = ["raw-window-handle-06", "renderer-software", "unstable-winit-030"] }
 tray-icon = "0.26"
 png = "0.18"
-tauri-winrt-notification = "0.7"
+tauri-winrt-notification = "0.8"
 
 
 [build-dependencies]
