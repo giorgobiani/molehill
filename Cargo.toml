@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/molehill-core", "crates/molehill-service", "crates/molehill"]
 
 [workspace.package]
-version = "0.2.1"
+version = "0.2.2"
 edition = "2024"
 license = "MIT"
 authors = ["Shota Giorgobiani"]
@@ -23,6 +23,7 @@ tracing-subscriber = "0.3"
 uuid = { version = "1", features = ["v4"] }
 windows = { version = "0.62", features = [
     "Win32_Foundation",
+    "Win32_Devices_DeviceAndDriverInstallation",
     "Win32_Security",
     "Win32_Security_Authorization",
     "Win32_Security_Credentials",

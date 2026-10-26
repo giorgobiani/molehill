@@ -245,6 +245,13 @@ impl Session {
     async fn tunnel(&mut self, spec: &Spec, dir: &std::path::Path, auth: AuthResult, cmds: &mut UnboundedReceiver<TunnelCmd>) -> Result<()> {
         self.set(TunnelState::Connecting, "Starting the tunnel");
         let ifname = format!("Molehill-{}", &self.id[..self.id.len().min(8)]);
+        // A ghost adapter by this name would make openconnect give up ("Set up tun device failed").
+        let alias = ifname.clone();
+        match tokio::task::spawn_blocking(move || netstats::remove_stale_wintun(&alias)).await {
+            Ok(Ok(0)) | Err(_) => {}
+            Ok(Ok(_)) => self.log(format!("Removed a stale {ifname} adapter left by an earlier session")),
+            Ok(Err(e)) => warn!("{}: {e:#}", self.name),
+        }
         // Just the path: on Windows openconnect runs `cscript.exe /e:JScript "<script>"` itself.
         let script = dir.join("vpnc-script-win.js").display().to_string();
         let mut cmd = Command::new(dir.join("openconnect.exe"));
