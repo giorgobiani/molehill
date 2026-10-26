@@ -28,7 +28,7 @@ fn user_agent() -> String {
     format!("Molehill/{APP_VERSION} (+https://github.com/giorgobiani/molehill)")
 }
 
-fn reg_string(subkey: &str, value: &str) -> Option<String> {
+pub(crate) fn reg_string(subkey: &str, value: &str) -> Option<String> {
     let (subkey, value) = (HSTRING::from(subkey), HSTRING::from(value));
     let mut buf = vec![0u16; 1024];
     let mut size = (buf.len() * 2) as u32;
