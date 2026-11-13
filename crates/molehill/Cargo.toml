@@ -13,7 +13,7 @@ tokio.workspace = true
 windows.workspace = true
 open = "5"
 raw-window-handle = "0.6"
-rfd = "0.17"
+rfd = "0.18"
 slint = { version = "1.18", features = ["raw-window-handle-06", "renderer-software", "unstable-winit-030"] }
 tray-icon = "0.26"
 png = "0.18"
